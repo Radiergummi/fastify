@@ -1,9 +1,9 @@
-import fastify, { FastifyInstance, FastifyRequest, FastifyReply, RouteHandlerMethod } from '../../fastify'
-import { expectType, expectError, expectAssignable } from 'tsd';
-import { HTTPMethods } from '../../types/utils'
-import * as http from 'http'
-import { RequestPayload } from '../../types/hooks'
-import { FastifyError } from 'fastify-error'
+import { FastifyError }                                                               from 'fastify-error';
+import * as http                                                                      from 'http';
+import { expectAssignable, expectError, expectType }                                  from 'tsd';
+import fastify, { FastifyInstance, FastifyReply, FastifyRequest, RouteHandlerMethod } from '../../fastify';
+import { RequestPayload }                                                             from '../../types/hooks';
+import { HTTPMethods }                                                                from '../../types/utils';
 
 /*
  * Testing Fastify HTTP Routes and Route Shorthands.
@@ -14,29 +14,30 @@ import { FastifyError } from 'fastify-error'
  * - `(path, options)`
  */
 
-const routeHandler: RouteHandlerMethod = function (request, reply) {
-  expectType<FastifyInstance>(this)
-  expectType<FastifyRequest>(request)
-  expectType<FastifyReply>(reply)
-}
+const routeHandler: RouteHandlerMethod = function ( request, reply ) {
+  expectType<FastifyInstance>(this);
+  expectType<FastifyRequest>(request);
+  expectType<FastifyReply>(reply);
+};
 
-type LowerCaseHTTPMethods = 'get' | 'post' | 'put' | 'patch' | 'head' | 'delete' | 'options'
+type LowerCaseHTTPMethods = 'get' | 'post' | 'put' | 'patch' | 'head' | 'delete' | 'options' | 'trace' | 'connect'
 
-;['GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'DELETE', 'OPTIONS'].forEach(method => {
+  ;
+[ 'GET', 'POST', 'PUT', 'PATCH', 'HEAD', 'DELETE', 'OPTIONS', 'TRACE', 'CONNECT' ].forEach(method => {
   // route method
   expectType<FastifyInstance>(fastify().route({
-    method: method as HTTPMethods,
-    url: '/',
-    handler: routeHandler
-  }))
+    method:  method as HTTPMethods,
+    url:     '/',
+    handler: routeHandler,
+  }));
 
-  const lowerCaseMethod: LowerCaseHTTPMethods = method.toLowerCase() as LowerCaseHTTPMethods
+  const lowerCaseMethod: LowerCaseHTTPMethods = method.toLowerCase() as LowerCaseHTTPMethods;
 
   // method as method
   expectType<FastifyInstance>(fastify()[lowerCaseMethod]('/', routeHandler))
   expectType<FastifyInstance>(fastify()[lowerCaseMethod]('/', {}, routeHandler))
   expectType<FastifyInstance>(fastify()[lowerCaseMethod]('/', { handler: routeHandler }))
-  
+
   expectType<FastifyInstance>(fastify()[lowerCaseMethod]('/', { handler: routeHandler, errorHandler: (error, request, reply) => reply.send('error') }))
 
   interface BodyInterface { prop: string }

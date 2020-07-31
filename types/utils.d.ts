@@ -1,11 +1,11 @@
-import * as http from 'http'
-import * as http2 from 'http2'
-import * as https from 'https'
+import * as http  from 'http';
+import * as http2 from 'http2';
+import * as https from 'https';
 
 /**
  * Standard HTTP method strings
  */
-export type HTTPMethods = 'DELETE' | 'GET' | 'HEAD' | 'PATCH' | 'POST' | 'PUT' | 'OPTIONS'
+export type HTTPMethods = 'DELETE' | 'GET' | 'HEAD' | 'PATCH' | 'POST' | 'PUT' | 'OPTIONS' | 'TRACE' | 'CONNECT'
 
 /**
  * A union type of the Node.js server types from the http, https, and http2 modules.
