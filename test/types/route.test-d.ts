@@ -1,9 +1,9 @@
-import { FastifyError }                                                               from 'fastify-error';
-import * as http                                                                      from 'http';
-import { expectAssignable, expectError, expectType }                                  from 'tsd';
-import fastify, { FastifyInstance, FastifyReply, FastifyRequest, RouteHandlerMethod } from '../../fastify';
-import { RequestPayload }                                                             from '../../types/hooks';
-import { HTTPMethods }                                                                from '../../types/utils';
+import fastify, { FastifyInstance, FastifyRequest, FastifyReply, RouteHandlerMethod } from '../../fastify'
+import { expectType, expectError, expectAssignable } from 'tsd';
+import { HTTPMethods } from '../../types/utils'
+import * as http from 'http'
+import { RequestPayload } from '../../types/hooks'
+import { FastifyError } from 'fastify-error'
 
 /*
  * Testing Fastify HTTP Routes and Route Shorthands.
@@ -14,11 +14,11 @@ import { HTTPMethods }                                                          
  * - `(path, options)`
  */
 
-const routeHandler: RouteHandlerMethod = function ( request, reply ) {
+const routeHandler: RouteHandlerMethod = function (request, reply) {
   expectType<FastifyInstance>(this);
   expectType<FastifyRequest>(request);
   expectType<FastifyReply>(reply);
-};
+}
 
 type LowerCaseHTTPMethods = 'get' | 'post' | 'put' | 'patch' | 'head' | 'delete' | 'options' | 'trace' | 'connect'
 
@@ -27,11 +27,11 @@ type LowerCaseHTTPMethods = 'get' | 'post' | 'put' | 'patch' | 'head' | 'delete'
   // route method
   expectType<FastifyInstance>(fastify().route({
     method:  method as HTTPMethods,
-    url:     '/',
+    url: '/',
     handler: routeHandler,
   }));
 
-  const lowerCaseMethod: LowerCaseHTTPMethods = method.toLowerCase() as LowerCaseHTTPMethods;
+  const lowerCaseMethod: LowerCaseHTTPMethods = method.toLowerCase() as LowerCaseHTTPMethods
 
   // method as method
   expectType<FastifyInstance>(fastify()[lowerCaseMethod]('/', routeHandler))
