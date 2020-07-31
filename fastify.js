@@ -158,53 +158,53 @@ function fastify (options) {
     [kPluginNameChain]: [],
     [kAvvioBoot]: null,
     // routes shorthand methods
-    delete:                function _delete (url, opts, handler) {
+    delete: function _delete (url, opts, handler) {
       return router.prepareRoute.call(this, 'DELETE', url, opts, handler)
     },
-    get:                   function _get (url, opts, handler) {
+    get: function _get (url, opts, handler) {
       return router.prepareRoute.call(this, 'GET', url, opts, handler)
     },
-    head:                  function _head (url, opts, handler) {
+    head: function _head (url, opts, handler) {
       return router.prepareRoute.call(this, 'HEAD', url, opts, handler)
     },
-    patch:                 function _patch (url, opts, handler) {
+    patch: function _patch (url, opts, handler) {
       return router.prepareRoute.call(this, 'PATCH', url, opts, handler)
     },
-    post:                  function _post (url, opts, handler) {
+    post: function _post (url, opts, handler) {
       return router.prepareRoute.call(this, 'POST', url, opts, handler)
     },
-    put:                   function _put (url, opts, handler) {
+    put: function _put (url, opts, handler) {
       return router.prepareRoute.call(this, 'PUT', url, opts, handler)
     },
-    options:               function _options (url, opts, handler) {
+    options: function _options (url, opts, handler) {
       return router.prepareRoute.call(this, 'OPTIONS', url, opts, handler)
     },
-    trace:                 function _trace (url, opts, handler) {
+    trace: function _trace (url, opts, handler) {
       return router.prepareRoute.call(this, 'TRACE', url, opts, handler)
     },
-    connect:               function _connect (url, opts, handler) {
+    connect: function _connect (url, opts, handler) {
       return router.prepareRoute.call(this, 'CONNECT', url, opts, handler)
     },
-    all:                   function _all (url, opts, handler) {
+    all: function _all (url, opts, handler) {
       return router.prepareRoute.call(this, supportedMethods, url, opts, handler)
     },
     // extended route
-    route:                 function _route (opts) {
+    route: function _route (opts) {
       // we need the fastify object that we are producing so we apply a lazy loading of the function,
       // otherwise we should bind it after the declaration
       return router.route.call(this, opts)
     },
     // expose logger instance
-    log:                   logger,
+    log: logger,
     // hooks
-    addHook:               addHook,
+    addHook: addHook,
     // schemas
-    addSchema:             addSchema,
-    getSchema:             schemas.getSchema.bind(schemas),
-    getSchemas:            schemas.getSchemas.bind(schemas),
-    setValidatorCompiler:  setValidatorCompiler,
+    addSchema: addSchema,
+    getSchema: schemas.getSchema.bind(schemas),
+    getSchemas: schemas.getSchemas.bind(schemas),
+    setValidatorCompiler: setValidatorCompiler,
     setSerializerCompiler: setSerializerCompiler,
-    setReplySerializer:    setReplySerializer,
+    setReplySerializer: setReplySerializer,
     // custom parsers
     addContentTypeParser: ContentTypeParser.helpers.addContentTypeParser,
     hasContentTypeParser: ContentTypeParser.helpers.hasContentTypeParser,
